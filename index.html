@@ -1,0 +1,94 @@
+<!--Based on https://codelabs.developers.google.com/codelabs/web-serial#0-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Web Serial Colab</title>
+    <meta charset="utf-8">
+   <!-- <meta name="codelab" content="getting-started-w-web-serial">-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+      // Redirect to HTTPS if HTTP is requested.
+      if (window.location.protocol === 'http:') {
+        window.location.href = 'https:' + window.location.href.substring(5);
+      }
+    </script>
+     <script src="https://code.jquery.com/jquery-3.3.1.min.js" > </script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
+  </head>  
+  <body>
+    <header class="header">
+    <h1>Spike Prime Control to Google Colab</h1>   
+    </header>
+    <main class="main">
+      
+<p><b>Browser Setup (once):</b></p>
+<ol>
+    <li>Open this webpage in a Chrome Browser</li>
+    <li>Go to the URL: chrome://flags</li>
+    <li>Search "Experimental Web Platform"</li>
+    <li><em>ENABLE</em> Experimental Web Platform (#enable-experimental-web-platform-features)</li>
+    <li>Restart your Chrome web browser</li>
+    <li>Plug in your SPIKE Prime hub by USB to this computer (and turn it on)!</li>
+</ol>
+
+<p><b>Once enabled:</b></p>
+<p><i>Click "Connect" green button and select the port where Spike Prime is connected (e.g., LEGO Technic Large Hub in FS mode...)</i>i></p>
+<p><b>Then you can:</b></p>
+<ul><li><u>Read data from a sensor</u></ul></li>
+<ol>
+    <li>Fill in the public IP adress of the server running in your Google Colab file (e.g., htttp://XXXXX.ngrok.io)</li>
+    <li>Select the sensor's port you want read data</li>
+    <li>Select the # of samples and the frequency to acquire them</li>
+    <li>Click on "Go" button</li>
+   
+</ol>
+
+<ul><li><u>Ask for a file from Colab and run on the Spike Prime:</u></ul></li>
+<ol>
+    <li>Fill in the public IP adress of the server running in your Google Colab file (e.g., htttp://XXXXX.ngrok.io)</li>
+    <li>Write the name of the file without extension</li>
+    <li>Click on "Ask for file" button</li>
+</ol>
+      <br>
+      <button class="button button1" id="butConnect" onclick="connectSerial()">Connect</button>
+
+      <br>
+<br><p><b>URL server in Colab: <input type="text" size="30" id="UrlToSend"></b></p>
+<br>
+<h4>Read Sensor from Spike Prime</h4>
+<div class="myDiv">
+<p><b>Choose the sensor Port:
+        <select name="sensor_port" id="sensor_port">
+            <option value="A" selected>A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+            <option value="F">F</option>
+        </select>
+  &nbsp;&nbsp; Take <input type="text" id="PointsToSend" maxlength="5" size="5"> points at <input type="text" id="FreqToSend" maxlength="8" size="8"> Hz</b>
+<button  class="button button3" onclick="sendDatalog()" style="width:50px">GO</button>
+</p>
+<h5><i>Sensor data received from Spike Prime</i></h5>
+<div id="serialResults">
+</div>
+   <pre id="log"></pre>
+</div>
+    
+<br>
+<h4>Send file to Spike Prime</h4>
+<div class="myDiv">
+<p><b>Name file: <input type="text" size="30" id="FileToUpload">
+<button  class="button button3" onclick="retrievefile()" style="width:90px">Ask for file</button>
+</p>
+ </div>
+<br>
+<br>
+  </main>
+  </body>
+</html>
